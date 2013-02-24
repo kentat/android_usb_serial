@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sample03</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello Serial!</string>
+    <string name="btnON">ON</string>
+    <string name="btnTEST">TEST</string>
+    <string name="btnOpen">Open</string>
+
+</resources>
