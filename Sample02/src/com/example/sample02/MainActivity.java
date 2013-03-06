@@ -35,21 +35,28 @@ public class MainActivity extends Activity {
     private static Handler mHandler;
     
     private TextView sysout;
+    private TextView mTextSnd;
+    private TextView mTextRcv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Log.v(TAG, "起動！！");
-		System.out.println("Start!!");
+		//System.out.println("Start!!");
 
 		//ハンドラを生成
 		mHandler = new Handler();
 
         // 標準出力を置き換え（標準出力(LogCat)＋テキストビュー）
-        /*TextView*/sysout = (TextView) findViewById(R.id.sysout);
-        System.setOut(new TextViewPrintStream(System.out, sysout));    // (1)
-        System.setErr(new TextViewPrintStream(System.err, sysout));    // (2)
+        ///*TextView*/sysout = (TextView) findViewById(R.id.sysout);
+        mTextSnd = (TextView) findViewById(R.id.TextSnd);
+        mTextRcv = (TextView) findViewById(R.id.TextRcv);
+        //System.setOut(new TextViewPrintStream(System.out, mTextSnd));    // (1)
+        //System.setErr(new TextViewPrintStream(System.err, mTextSnd));    // (2)
+//        System.setOut(new TextViewPrintStream(System.out, sysout));    // (1)
+        //        System.setErr(new TextViewPrintStream(System.err, sysout));    // (2)
         
 //      mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
 //      mSerialDevice = UsbSerialProber.acquire(mUsbManager);
@@ -72,8 +79,9 @@ public class MainActivity extends Activity {
         		// TODO Auto-generated method stub
         		// クリックされた時の処理を記述
         		Log.v(TAG,"Button was clicked.[OK]");
-        		System.out.println("Button was clicked.[OK]");
-                try{
+        		//System.out.println("Button was clicked.[OK]");
+        		mTextSnd.append("On");
+        		try{
                 	mSerialDevice.write("ON".getBytes("UTF-8"),2);
                 }
                 catch(IOException e){
@@ -90,7 +98,7 @@ public class MainActivity extends Activity {
         		// TODO Auto-generated method stub
         		// クリックされた時の処理を記述
         		Log.v(TAG,"Button was clicked.[TEST]");
-        		System.out.println("Button was clicked.[TEST]");
+        		//System.out.println("Button was clicked.[TEST]");
         		// 出力する
 //        		for (int i = -50; i < 50; i++) {
 //              	System.out.printf("%3d|", i);    // (3)
@@ -110,23 +118,23 @@ public class MainActivity extends Activity {
         		// TODO Auto-generated method stub
         		// クリックされた時の処理を記述
         		Log.v(TAG,"Button was clicked.[Open]");
-        		System.out.println("Button was clicked.[Open]");
+        		//System.out.println("Button was clicked.[Open]");
 
         		mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
                 mSerialDevice = UsbSerialProber.acquire(mUsbManager);
                 if (mSerialDevice != null) {
-            		System.out.println("UsbSerialProber.acquire [Success]");
+                	//System.out.println("UsbSerialProber.acquire [Success]");
 	                  try{
 	                	mSerialDevice.open();
 	                	mSerialDevice.setBaudRate(9600);
 	                    start_read_thread(); // シリアル通信を読むスレッドを起動
 	                  }
 	                  catch(IOException e){
-	              		System.out.println(e.getMessage());
+	                	  //System.out.println(e.getMessage());
 	                    e.printStackTrace();
 	                  }
                 }else{
-              		System.out.println("mSerialDevice.acquire [Fail!]");
+                	//System.out.println("mSerialDevice.acquire [Fail!]");
                 }
         	}
         });
@@ -168,7 +176,8 @@ public class MainActivity extends Activity {
     	              mHandler.post(new Runnable() {
     	              	//run()の中の処理はメインスレッドで動作されます。
     	                  public void run() {
-    	    	        	  System.out.println(new String(mBuf, 0, mNum));
+    	                	  //System.out.println(new String(mBuf, 0, mNum));
+    	    	        	  mTextRcv.append(new String(mBuf, 0, mNum));
 //    	    	        	  System.out.println("Kita!!");
     	                  }
     	              });
