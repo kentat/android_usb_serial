@@ -1,6 +1,7 @@
 package com.example.sample02;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.view.Menu;
 
@@ -31,6 +32,9 @@ public class MainActivity extends Activity {
     /** Logcatのタグに含める文字列. */
     private static final String TAG = "arduino";
     
+    private static Handler mHandler;
+    
+    private TextView sysout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +42,12 @@ public class MainActivity extends Activity {
 
         Log.v(TAG, "起動！！");
 		System.out.println("Start!!");
-        
+
+		//ハンドラを生成
+		mHandler = new Handler();
+
         // 標準出力を置き換え（標準出力(LogCat)＋テキストビュー）
-        TextView sysout = (TextView) findViewById(R.id.sysout);
+        /*TextView*/sysout = (TextView) findViewById(R.id.sysout);
         System.setOut(new TextViewPrintStream(System.out, sysout));    // (1)
         System.setErr(new TextViewPrintStream(System.err, sysout));    // (2)
         
@@ -126,16 +133,45 @@ public class MainActivity extends Activity {
     
     }
 
+ // Handler h = new Handler();
+ // public void run() {
+ // 	try{
+//	        while (true) {
+//	            Thread.sleep(1000);
+//	            h.post(new Runnable() {
+//	                public void run() {
+//	                	sysout.setText("ABC");
+//	                }
+//	            });
+//	        }
+ //   	}
+//		catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//    }
+
+	private byte mBuf[];
+	private int mNum;
     public void start_read_thread(){
     	  new Thread(new Runnable(){
     	    public void run(){
     	      try{
+    	    	mBuf = new byte[256];
     	        while(true){
-    	          byte buf[] = new byte[256];
-    	          int num = mSerialDevice.read(buf, buf.length);
-    	          if(num > 0){
-    	        	  Log.v("arduino", new String(buf, 0, num)); // Arduinoから受信した値をlogcat出力
+//  	          final byte buf[] = new byte[256];
+//  	          final int num = mSerialDevice.read(buf, buf.length);
+//  	          mBuf = new byte[256];
+    	          mNum = mSerialDevice.read(mBuf, mBuf.length);
+    	          if(mNum > 0){
+//    	        	  Log.v("arduino", new String(buf, 0, num)); // Arduinoから受信した値をlogcat出力
 //    	        	  System.out.println(new String(buf, 0, num));
+    	              mHandler.post(new Runnable() {
+    	              	//run()の中の処理はメインスレッドで動作されます。
+    	                  public void run() {
+    	    	        	  System.out.println(new String(mBuf, 0, mNum));
+//    	    	        	  System.out.println("Kita!!");
+    	                  }
+    	              });
     	          }
     	          Thread.sleep(10);
     	        }
@@ -169,3 +205,4 @@ public class MainActivity extends Activity {
 	}
     
 }
+
