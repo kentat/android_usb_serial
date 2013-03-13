@@ -28,9 +28,9 @@ public final class R {
         public static final int TextRcv=0x7f0a0006;
         public static final int TextSnd=0x7f0a0005;
         public static final int action_settings=0x7f0a0007;
-        public static final int btnON=0x7f0a0003;
-        public static final int btnOpen=0x7f0a0002;
-        public static final int btnTEST=0x7f0a0004;
+        public static final int btnOpen=0x7f0a0004;
+        public static final int btnSnd=0x7f0a0003;
+        public static final int etCmd=0x7f0a0002;
         public static final int linearLayout1=0x7f0a0001;
     }
     public static final class integer {
@@ -49,6 +49,7 @@ public final class R {
         public static final int btnOpen=0x7f070005;
         public static final int btnTEST=0x7f070004;
         public static final int hello_world=0x7f070002;
+        public static final int send=0x7f070006;
     }
     public static final class style {
         /** 

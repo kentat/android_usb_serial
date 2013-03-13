@@ -7,5 +7,6 @@
     <string name="btnON">ON</string>
     <string name="btnTEST">TEST</string>
     <string name="btnOpen">Open</string>
+    <string name="send">Send</string>
 
 </resources>

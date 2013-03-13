@@ -16,23 +16,27 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
+            <EditText
+                android:id="@+id/etCmd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/btnSnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send" />
+
             <Button
                 android:id="@+id/btnOpen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btnOpen" />
-
-            <Button
-                android:id="@+id/btnON"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btnON" />
-
-            <Button
-                android:id="@+id/btnTEST"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btnTEST" />
         </LinearLayout>
 
         <TextView
