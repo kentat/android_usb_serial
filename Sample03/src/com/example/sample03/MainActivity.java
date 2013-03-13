@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
             		System.out.println("UsbSerialProber.acquire [Success]");
 	                  try{
 	                	mSerialDevice.open();
-	                	mSerialDevice.setBaudRate(9600);
+	                	//mSerialDevice.setBaudRate(9600);
 	                    start_read_thread(); // シリアル通信を読むスレッドを起動
 	                  }
 	                  catch(IOException e){

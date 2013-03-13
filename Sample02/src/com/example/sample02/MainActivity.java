@@ -10,21 +10,26 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ScrollView;
 import java.io.*;
 import android.hardware.usb.*;
+import android.widget.LinearLayout;
 import com.hoho.android.usbserial.driver.*;
 
 public class MainActivity extends Activity {
 
 	private UsbSerialDriver mSerialDevice;
 	private UsbManager mUsbManager;
-	private TextView sysout;
+	//private TextView sysout;
 	private TextView mTextSnd;
 	private TextView mTextRcv;
 	private EditText mEditCmd; 
 	private Button mBtnSnd;
 	private Button mBtnOpen;
-
+	private ScrollView mScvSnd;
+	private ScrollView mScvRcv;
+	private LinearLayout mLly1;
+	
 	private static final String TAG = "arduino";
 	private static Handler mHandler;
 
@@ -34,23 +39,29 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		mHandler = new Handler();
+		mLly1    = (LinearLayout) findViewById(R.layout.activity_main);
 		mTextSnd = (TextView) findViewById(R.id.TextSnd);
 		mTextRcv = (TextView) findViewById(R.id.TextRcv);
+		//mScvSnd  = (ScrollView) findViewById(R.id.ScrollViewSnd);
+		//mScvRcv  = (ScrollView) findViewById(R.id.ScrollViewRcv);
 		mEditCmd = (EditText) findViewById(R.id.etCmd);
-
+		//mScvSnd.addView(mLly1);
+		//mScvRcv.addView(mLly1);
 		mBtnSnd = (Button)findViewById(R.id.btnSnd);
 		mBtnSnd.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				LogOut("Button was clicked.[OK]");
-				mTextSnd.append( mEditCmd.toString() );
-				try{
-					mSerialDevice.write(mEditCmd.toString().getBytes("UTF-8"),
-										mEditCmd.toString().length());
-				}
-				catch(IOException e){
-					e.printStackTrace();
-				}
+				mTextSnd.append( mEditCmd.getText().toString() );
+				mTextRcv.append( mEditCmd.getText().toString() );
+
+				//try{
+					//mSerialDevice.write(mEditCmd.toString().getBytes("UTF-8"),
+					//					mEditCmd.toString().length());
+				//}
+				//catch(IOException e){
+				//	e.printStackTrace();
+				//}
 			}
 		});
 
@@ -63,13 +74,13 @@ public class MainActivity extends Activity {
 				mSerialDevice = UsbSerialProber.acquire(mUsbManager);
 				if (mSerialDevice != null) {
 					LogOut("UsbSerialProber.acquire [Success]");
-					try{
-						mSerialDevice.open();
-						start_read_thread();
-					}catch(IOException e){
-						LogOut("UsbSerialProber.acquire [Success]");
-						e.printStackTrace();
-					}
+					//try{
+						//mSerialDevice.open();
+						//start_read_thread();
+					//}catch(IOException e){
+					//	LogOut("UsbSerialProber.acquire [Success]");
+					//	e.printStackTrace();
+					//}
 				}else{
 					LogOut("mSerialDevice.acquire [Fail!]");
 				}

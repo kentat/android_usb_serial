@@ -25,13 +25,15 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f0a0000;
-        public static final int TextRcv=0x7f0a0006;
-        public static final int TextSnd=0x7f0a0005;
-        public static final int action_settings=0x7f0a0007;
+        public static final int LinearLayout2=0x7f0a0001;
+        public static final int ScrollViewRcv=0x7f0a0007;
+        public static final int ScrollViewSnd=0x7f0a0005;
+        public static final int TextRcv=0x7f0a0008;
+        public static final int TextSnd=0x7f0a0006;
+        public static final int action_settings=0x7f0a0009;
         public static final int btnOpen=0x7f0a0004;
         public static final int btnSnd=0x7f0a0003;
         public static final int etCmd=0x7f0a0002;
-        public static final int linearLayout1=0x7f0a0001;
     }
     public static final class integer {
         public static final int textLines=0x7f060000;

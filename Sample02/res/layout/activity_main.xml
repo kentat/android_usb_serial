@@ -11,46 +11,56 @@
     tools:context=".MainActivity" >
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
+            android:id="@+id/LinearLayout2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
             <EditText
                 android:id="@+id/etCmd"
-                android:layout_width="wrap_content"
+                android:layout_width="40dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10" >
 
                 <requestFocus />
-            </EditText>
+             </EditText>
 
             <Button
                 android:id="@+id/btnSnd"
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/send" />
 
             <Button
                 android:id="@+id/btnOpen"
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/btnOpen" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/TextSnd"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.18" />
-
-        <TextView
-            android:id="@+id/TextRcv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.18" />
-<!--
+		<ScrollView android:id="@+id/ScrollViewSnd"
+		    android:layout_width="wrap_content"
+		    android:layout_height="300dip"
+            android:layout_weight="1" >
+	        <TextView
+	            android:id="@+id/TextSnd"
+	            android:textIsSelectable="true"
+	            android:layout_height="wrap_content"
+	            android:layout_width="wrap_content"/>
+		</ScrollView>
+		<ScrollView android:id="@+id/ScrollViewRcv"
+		    android:layout_width="wrap_content"
+		    android:layout_height="300dip"
+            android:layout_weight="1" >
+	        <TextView
+	            android:id="@+id/TextRcv"
+	            android:textIsSelectable="true"
+	            android:layout_height="wrap_content"
+	            android:layout_width="wrap_content"/>
+		</ScrollView>
+        <!--
         <ScrollView
             android:id="@+id/sysoutScrollView"
             android:layout_width="fill_parent"
