@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.Window;
 import android.widget.EditText;
 import android.util.Log;
 import android.content.Context;
@@ -36,6 +37,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 
 		mHandler = new Handler();
@@ -52,8 +54,8 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				LogOut("Button was clicked.[OK]");
-				mTextSnd.append( mEditCmd.getText().toString() );
-				mTextRcv.append( mEditCmd.getText().toString() );
+				mTextSnd.append( mEditCmd.getText().toString()+"\n" );
+				mTextRcv.append( mEditCmd.getText().toString()+"\n" );
 
 				//try{
 					//mSerialDevice.write(mEditCmd.toString().getBytes("UTF-8"),
